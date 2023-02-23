@@ -1,4 +1,4 @@
-# Social Media Application (YouMe)
+# Social Media Application ( YouMe )
 
 This is a social media application built using the MERN stack (MongoDB, Express.js, React, and Node.js). The application allows users to create an account, log in, create and edit their profile, create and delete posts, and interact with other users by liking and commenting on their posts.
 
@@ -6,7 +6,6 @@ This is a social media application built using the MERN stack (MongoDB, Express.
 Group: SE-2110
 
 Amina Baiuzak
-
 
 Islam Nugman
 
