@@ -45,6 +45,7 @@ const initialValuesLogin = {
 };
 
 const Form = () => {
+  // window.localStorage.clear();
   const [pageType, setPageType] = useState("login");
   const { palette } = useTheme();
   const dispatch = useDispatch();

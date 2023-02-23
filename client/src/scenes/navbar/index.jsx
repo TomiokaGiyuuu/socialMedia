@@ -22,7 +22,7 @@ import {
 } from "@mui/icons-material";
 import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
-import { useNavigate } from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
 
 const Navbar = () => {
@@ -31,6 +31,23 @@ const Navbar = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  const { userId } = useParams();
+  const token = useSelector((state) => state.token);
+  const { _id, picturePath } = useSelector((state) => state.user);
+
+
+
+  const deleteUser = async () => {
+    if(window.confirm("Are you sure you want to delete your account?")){
+      window.localStorage.clear();
+      dispatch(setLogout())
+      navigate("/")
+      await fetch(`http://localhost:3001/users/${userId}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    }
+  };
 
   const theme = useTheme();
   const neutralLight = theme.palette.neutral.light;
@@ -40,6 +57,8 @@ const Navbar = () => {
   const alt = theme.palette.background.alt;
 
   const fullName = `${user.firstName} ${user.lastName}`;
+
+
 
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
@@ -108,6 +127,9 @@ const Navbar = () => {
                 <Typography>{fullName}</Typography>
               </MenuItem>
               <MenuItem onClick={() => dispatch(setLogout())}>Log Out</MenuItem>
+              {userId && (_id === userId) && <MenuItem onClick={deleteUser}>
+                Delete Account
+              </MenuItem>}}
             </Select>
           </FormControl>
         </FlexBetween>
@@ -185,6 +207,10 @@ const Navbar = () => {
                 <MenuItem onClick={() => dispatch(setLogout())}>
                   Log Out
                 </MenuItem>
+                {userId && (_id === userId) && <MenuItem onClick={() => deleteUser()}>
+                  Delete Account
+                </MenuItem>}
+
               </Select>
             </FormControl>
           </FlexBetween>

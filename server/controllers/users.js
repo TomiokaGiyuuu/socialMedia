@@ -30,6 +30,24 @@ export const getUserFriends = async (req, res) => {
   }
 };
 
+export const deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    User.findByIdAndDelete(id, function (err, docs) {
+      if (err){
+        console.log(err)
+      }
+      else{
+        console.log("Deleted : ", docs);
+      }
+    });
+    res.status(200);
+    next()
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
 /* UPDATE */
 export const addRemoveFriend = async (req, res) => {
   try {
