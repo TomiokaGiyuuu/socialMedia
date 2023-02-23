@@ -4,7 +4,9 @@ This is a social media application built using the MERN stack (MongoDB, Express.
 
 ### Group Members
 Group: SE-2110
+
 Amina Baiuzak
+
 Islam Nugman
 
 ## Prerequisites
